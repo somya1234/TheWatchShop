@@ -1,0 +1,68 @@
+KRTRAC.SEND = function () {
+	
+	KRTRAC.path = typeof KRTRAC.path !== 'undefined' ? KRTRAC.path : '/help';
+	KRTRAC.result = typeof KRTRAC.result !== 'undefined' ? KRTRAC.result : '';
+	KRTRAC.data = typeof KRTRAC.data !== 'undefined' ? KRTRAC.data : '';
+	KRTRAC.output = typeof KRTRAC.output !== 'undefined' ? KRTRAC.output : 0;
+		
+	KRTRAC.send = typeof KRTRAC.send !== 'undefined' ? KRTRAC.send : function() { 
+		var xmlhttp;
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			 xmlhttp=new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				
+				if(KRTRAC.output == '1' && xmlhttp.responseText) {
+					KRTRAC.result = xmlhttp.responseText;					
+					return true;
+				} else {
+					return true;
+				}
+			}
+		}
+		
+		xmlhttp.open('POST', KRTRAC.path, true);
+		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp.send(KRTRAC.data);
+		return false;
+	};
+	
+	KRTRAC.data = '';
+	
+	for (var i=0; i<KRTRAC.length; i++) {
+		var data = KRTRAC[i].toString();
+		all_data = data.split(",");
+	
+		switch(all_data[0]) {
+			case 'data' :
+				var data_key = all_data[1];
+				all_data.splice(0, 2);
+				var data_value = all_data.toString();
+				KRTRAC.data += '&'+data_key+'='+data_value; 
+				break;
+			case 'output' :
+				KRTRAC.output = all_data[1];
+				break;
+			case 'path' :
+				var path_check = all_data[1].match(/http/g);
+				
+				if(path_check == null) {
+					all_data[1] = document.getElementById('krtrack').src.replace('track.js', all_data[1]);	 
+				}
+				
+				KRTRAC.path = all_data[1];
+				KRTRAC.send();
+				break;			
+		};
+	}
+	
+	KRTRAC.splice(0, KRTRAC.length);
+	
+	return true;
+}
+
+window.onload = KRTRAC.SEND();

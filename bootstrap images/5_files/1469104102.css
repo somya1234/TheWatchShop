@@ -1,0 +1,36 @@
+
+/* customize for body */ 
+body { background-color:#ffffff} 
+
+/* customize for topbar */ 
+#headertop .container-inner { background-color:#ffffff} 
+#headertop a { color:#000000} 
+#headertop .login { color:#000000} 
+
+/* customize for header-main */ 
+#headerbottom .container-inner { background-color:#ffffff} 
+
+/* customize for pav-mainnav */ 
+ #mainnav .container .navbar-inner { background-color:#f63877} 
+#mainnav .navbar .nav li a { color:#000000} 
+#mainnav .dropdown p, #mainnav .dropdown h3 , #mainnav .megamenu .mega-group &gt; a .menu-title { color:#000000} 
+
+/* customize for footer-top */ 
+
+/* customize for footer-center */ 
+
+/* customize for powered */ 
+
+/* customize for product */ 
+.price { color:#f00000} 
+.price .price-old { color:#0f070f} 
+
+/* customize for modules */ 
+.sidebar .box .box-heading { background-color:#f63877} 
+
+/* customize for moduless */ 
+#mainnav .navbar .nav li a, .navbar .nav  li  a  { font-weight:normal} 
+body, p { font-weight:normal} 
+h1, h2, h3 { font-weight:bold} 
+.product-block .price { font-weight:normal} 
+a.button, input.button, a.button-exclusive, input.button-exclusive { font-weight:normal} 
