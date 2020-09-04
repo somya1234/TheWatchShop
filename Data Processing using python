@@ -1,0 +1,22 @@
+# Data Processing
+# Converting Genres into different columns 
+# Here we just create columns and put there initial value as 0
+x = data.Genres
+a = list()
+for i in x:
+    abc = i
+    a.append(abc.split('|'))
+a = pd.DataFrame(a)   
+b = a[0].unique()
+for i in b:
+    data[i] = 0
+data.head(2)
+
+# we assign 1 to all the columns which are present in the Genres
+for i in b:
+    data.loc[data['Genres'].str.contains(i), i] = 1
+    
+    # Now there is no use of genre 
+# Since we have movie id so there is no need for movie names as well
+data = data.drop(['Genres','Title'],axis =1)
+data.head()
